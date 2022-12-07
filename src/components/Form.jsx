@@ -13,6 +13,8 @@ const Form = () => {
       return;
     }
     manageClimate(search)
+    setError("")
+
   }
 
 

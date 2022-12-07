@@ -10,6 +10,9 @@ const ClimateProvider = ({children}) => {
     }
   )
   const [result ,setResult ] =useState({});
+  const [noResult, setNoResult] = useState('')
+  const [loading, setLoading] = useState(false)
+
 
   const dataSearch = e=> {
     //Adding new info
@@ -19,7 +22,8 @@ const ClimateProvider = ({children}) => {
     })
   }
   const  manageClimate =async dataSearch => {
-
+    setLoading(true)
+    setNoResult('')
     try {
       const {city, country} = dataSearch
       const appId = import.meta.env.VITE_API_KEY
@@ -33,14 +37,20 @@ const ClimateProvider = ({children}) => {
       setResult(weather)
     } catch (error) {
       console.log(error);
-    }
+      setNoResult('There are no results')
+    } finally{
+      setTimeout(() => {
+        setLoading(false)
 
+      }, 1000);
+
+    }
 
   }
   
   return (
     <ClimateContext.Provider
-      value={{search, dataSearch, manageClimate, result}}
+      value={{search, dataSearch, manageClimate, result, loading, noResult}}
     >
         {children}
     </ClimateContext.Provider>
