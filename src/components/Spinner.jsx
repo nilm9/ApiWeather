@@ -9,6 +9,6 @@ const Spinner = () => {
         <div class="sk-cube3 sk-cube"></div>
     </div>
   )
-}
+}//
 
 export default Spinner
